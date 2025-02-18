@@ -95,7 +95,7 @@ class HttpClient {
         ...headers,
         ...config.headers,
       },
-      agent: config.httpsAgent,
+      httpsAgent: config.httpsAgent,
     });
   }
 

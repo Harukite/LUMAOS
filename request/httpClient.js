@@ -95,7 +95,7 @@ class HttpClient {
         ...headers,
         ...config.headers,
       },
-      httpsAgent: config.httpsAgent || null ，
+      httpsAgent: config.httpsAgent || null 
     });
   }
 
@@ -107,7 +107,7 @@ class HttpClient {
         ...headers,
         ...config.headers,
       },
-      httpsAgent: config.httpsAgent || null ，
+      httpsAgent: config.httpsAgent || null 
     });
   }
   // 异步初始化方法

@@ -42,4 +42,43 @@ function createProxyAgent(proxyUrl) {
   }
 }
 
-export { readAccounts,createProxyAgent };
+// 获取tokens
+async function getAccessTokens() {
+    try {
+        const tokenData = await fs.readFile('tokens.txt', 'utf8');
+        const tokens = tokenData.split('\n')
+            .map(token => token.trim())
+            .filter(token => token.length > 0);
+        
+        if (tokens.length === 0) {
+            throw new Error('No tokens found in tokens.txt');
+        }
+        return tokens;
+    } catch (error) {
+        console.error(chalk.red.bold(`[ERROR] Failed to read tokens from tokens.txt: ${error.message}`));
+        throw error;
+    }
+}
+
+// 获取代理信息
+async function getProxies() {
+    try {
+        const proxyData = await fs.readFile(PROXIES_FILE, 'utf8');
+        const proxies = proxyData.split('\n')
+            .map(proxy => proxy.trim())
+            .filter(proxy => proxy.length > 0);
+        
+        if (proxies.length === 0) {
+            console.log(chalk.yellow(`[WARNING] No proxies found in ${PROXIES_FILE}. Running without proxies.`));
+            return [];
+        }
+        
+        console.log(chalk.white(`🌐 [INFO] Loaded ${proxies.length} proxies from ${PROXIES_FILE}`));
+        return proxies;
+    } catch (error) {
+        console.error(chalk.yellow(`[WARNING] Failed to read proxies from ${PROXIES_FILE}: ${error.message}. Running without proxies.`));
+        return [];
+    }
+}
+
+export { readAccounts,createProxyAgent,getProxies,getAccessTokens };  

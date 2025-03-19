@@ -46,9 +46,7 @@ function createProxyAgent(proxyUrl) {
 async function getAccessTokens() {
     try {
         const tokenData = await fs.readFile('tokens.txt', 'utf8');
-        const tokens = tokenData.split('\n')
-            。map(token => token.trim())
-            。filter(token => token.length > 0);
+        const tokens = tokenData.split('\n').map(token => token.trim()).filter(token => token.length > 0);
         
         if (tokens.length === 0) {
             throw new Error('No tokens found in tokens.txt');
@@ -64,9 +62,7 @@ async function getAccessTokens() {
 async function getProxies(PROXIES_FILE = 'proxies.txt') {
     try {
         const proxyData = await fs.readFile(PROXIES_FILE, 'utf8');
-        const proxies = proxyData.split('\n')
-            。map(proxy => proxy.trim())
-            。filter(proxy => proxy.length > 0);
+        const proxies = proxyData.split('\n').map(proxy => proxy.trim()).filter(proxy => proxy.length > 0);
         
         if (proxies.length === 0) {
             console.log(chalk.yellow(`[WARNING] No proxies found in ${PROXIES_FILE}. Running without proxies.`));

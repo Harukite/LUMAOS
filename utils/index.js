@@ -47,8 +47,8 @@ async function getAccessTokens() {
     try {
         const tokenData = await fs.readFile('tokens.txt', 'utf8');
         const tokens = tokenData.split('\n')
-            .map(token => token.trim())
-            .filter(token => token.length > 0);
+            。map(token => token.trim())
+            。filter(token => token.length > 0);
         
         if (tokens.length === 0) {
             throw new Error('No tokens found in tokens.txt');
@@ -61,12 +61,12 @@ async function getAccessTokens() {
 }
 
 // 获取代理信息
-async function getProxies() {
+async function getProxies(PROXIES_FILE = 'proxies.txt') {
     try {
         const proxyData = await fs.readFile(PROXIES_FILE, 'utf8');
         const proxies = proxyData.split('\n')
-            .map(proxy => proxy.trim())
-            .filter(proxy => proxy.length > 0);
+            。map(proxy => proxy.trim())
+            。filter(proxy => proxy.length > 0);
         
         if (proxies.length === 0) {
             console.log(chalk.yellow(`[WARNING] No proxies found in ${PROXIES_FILE}. Running without proxies.`));
@@ -79,6 +79,11 @@ async function getProxies() {
         console.error(chalk.yellow(`[WARNING] Failed to read proxies from ${PROXIES_FILE}: ${error.message}. Running without proxies.`));
         return [];
     }
+}
+
+// 延迟函数
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms * 1000));
 }
 
 export { readAccounts,createProxyAgent,getProxies,getAccessTokens };  

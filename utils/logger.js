@@ -68,7 +68,7 @@ class Logger {
   }
 
   log(level, message, value = "", options = {}) {
-    if (!this._shouldLog(level)) return;
+    // if (!this._shouldLog(level)) return;
 
     const now = new Date().toISOString();
     const color = this.colors[level] || chalk.white;

@@ -1,6 +1,10 @@
 [
   {
     "token": "1",
-    "proxy": "http://14a7c3052cbbb:9f4ac5d16b@91.124.151.167:12323"
+    "proxy": "socks5://9cfa4252:oJsZy0b2@156.250.66.82:25881"
+  },
+  {
+    "token": "2",
+    "proxy": "socks5://9cfa4252:oJsZy0b2@156.250.66.82:25880"
   }
 ]

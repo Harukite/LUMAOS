@@ -11,7 +11,7 @@ const LOG_LEVELS = {
 
 class Logger {
   constructor(options = {}) {
-    this.prefix = options.prefix || "Mygate-Node";
+    this.prefix = options.prefix || "Lumao";
     this.logLevel = options.logLevel || "info";
 
     this.colors = {
@@ -43,11 +43,18 @@ class Logger {
       if (stringify) {
         try {
           // 尝试使用 JSON.stringify 转换
-          const stringValue = JSON.stringify(value);
+          const stringValue = JSON.stringify(value, null, 2);
           return ` ${valueColor(stringValue)}`;
         } catch (e) {
-          // 如果 JSON.stringify 失败，使用 toString
-          return ` ${valueColor(value.toString())}`;
+          // 如果 JSON.stringify 失败，使用 util.inspect 作为备选
+          const inspectOptions = {
+            colors: true,
+            depth: 3,
+            compact: false,
+            breakLength: 80,
+          };
+          const formattedValue = util.inspect(value, inspectOptions);
+          return `\n${valueColor(formattedValue)}`;
         }
       } else {
         // 使用 util.inspect 展示原始格式
